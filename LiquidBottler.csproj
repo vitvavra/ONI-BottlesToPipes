@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -60,15 +60,21 @@
     <Compile Include="LiquidBottleEmptier.cs" />
     <Compile Include="LiquidBottleEmptierConfig.cs" />
     <Compile Include="LiquidBottlerConfig.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mod_info.yaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-echo F | xcopy /Y /S /R /Q "$(TargetName).dll" "$(SolutionDir)mods\$(TargetName)\$(TargetName).dll"
-if exist "$(ProjectDir)anims" (xcopy /Y /R /I /E /Q  "$(ProjectDir)anims" "$(SolutionDir)mods\$(TargetName)\anims")
-if exist "$(TargetDir)Config.json" (echo F | xcopy /Y /S /R /Q "$(TargetDir)Config.json" "$(SolutionDir)mods\$(TargetName)\Config.json")
-xcopy /Y /R /I /E /Q "$(SolutionDir)mods\$(TargetName)" "C:%HOMEPATH%\Documents\Klei\OxygenNotIncluded\mods\dev\$(TargetName)"
-    </PostBuildEvent>
+    <PostBuildEvent>if not exist "$(ProjectDir)mods\$(TargetName)" (mkdir $(ProjectDir)\mods\$(TargetName))
+xcopy /Y /S /R /Q "$(TargetPath)" "$(ProjectDir)mods\$(TargetName)\$(TargetName).dll" 
+if exist "$(ProjectDir)anims" (xcopy /Y /R /I /E /Q  "$(ProjectDir)anims" "$(ProjectDir)mods\$(TargetName)\anims")
+if exist "$(ProjectDir)Config.json" (copy /Y /S /R /Q "$(ProjectDir)Config.json" "$(ProjectDir)mods\$(TargetName)\Config.json")
+if exist "$(ProjectDir)mod_info.yaml" (copy /Y "$(ProjectDir)mod_info.yaml" "$(ProjectDir)mods\$(TargetName)\mod_info.yaml")
+xcopy /Y /R /I /E /Q "$(ProjectDir)mods\$(TargetName)" "C:%25HOMEPATH%25\Documents\Klei\OxygenNotIncluded\mods\dev\$(TargetName)"
+rmdir /s /q "$(ProjectDir)mods"</PostBuildEvent>
   </PropertyGroup>
 </Project>
