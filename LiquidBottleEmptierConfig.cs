@@ -44,14 +44,12 @@ namespace Alesseon.Building.Config
         {
             Prioritizable.AddRef(go);
             Storage storage = go.AddOrGet<Storage>();
-            storage.allowItemRemoval = false;
             storage.storageFilters = STORAGEFILTERS.LIQUIDS;
             storage.showInUI = true;
             storage.showDescriptor = true;
-            storage.capacityKg = 300f;
+            storage.capacityKg = 200f;
             go.AddOrGet<TreeFilterable>();
-
-            LiquidBottleEmptier bottleEmptier = go.AddOrGet<LiquidBottleEmptier>();
+            go.AddOrGet<LiquidBottleEmptier>();
             ConduitDispenser dispenser = go.AddOrGet<ConduitDispenser>();
             dispenser.conduitType = ConduitType.Liquid;
             dispenser.elementFilter = LiquidBottlerConfig.enabledElements;

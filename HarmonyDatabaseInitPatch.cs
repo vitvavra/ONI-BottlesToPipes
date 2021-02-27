@@ -1,4 +1,5 @@
-﻿using Harmony;
+﻿using System.Collections.Generic;
+using Harmony;
 
 namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
 {
@@ -42,10 +43,36 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
     [HarmonyPatch(typeof(Db), "Initialize")]
     public class LiquidBottlerDbPatch
     {
+        private const string TechID = "ImprovedLiquidPiping";
         private static void Postfix()
         {
-            Db.Get().Techs.TryGet("ImprovedLiquidPiping")?.unlockedItemIDs.Add(Building.Config.LiquidBottlerConfig.ID);
-            Db.Get().Techs.TryGet("ImprovedLiquidPiping")?.unlockedItemIDs.Add(Building.Config.LiquidBottleEmptierConfig.ID);
+
+            if (typeof(Database.Techs).GetField("TECH_GROUPING") == null)
+            {
+                Tech tech = Db.Get().Techs.TryGet(TechID);
+                if (tech == null)
+                    return;
+                ICollection<string> list = (ICollection<string>)tech.GetType().GetField("unlockedItemIDs")?.GetValue(tech);
+                if (list == null)
+                    return;
+
+                list.Add(Building.Config.LiquidBottlerConfig.ID);
+                list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
+            }
+            else
+            {
+
+                //List<string> list = new List<string>(Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"]);
+                //list.Add(Building.Config.LiquidBottlerConfig.ID);
+                //list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
+                //Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"] = list.ToArray();
+
+                //System.Reflection.FieldInfo info = typeof(Database.Techs).GetField("TECH_GROUPING");
+                //Dictionary<string, string[]> dict = (Dictionary<string, string[]>)info.GetValue(null);
+                //dict[TechID].Append(Building.Config.LiquidBottlerConfig.ID);
+                //dict[TechID].Append(Building.Config.LiquidBottleEmptierConfig.ID);
+                //typeof(Database.Techs).GetField("TECH_GROUPING").SetValue(null, dict);
+            }
         }
     }
 }

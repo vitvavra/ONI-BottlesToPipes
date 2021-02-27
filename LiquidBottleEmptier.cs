@@ -140,27 +140,25 @@ namespace Alesseon.Building
 
             public void Emit(float dt)
             {
-                PrimaryElement firstPrimaryElement = GetFirstPrimaryElement();
+                PrimaryElement firstPrimaryElement = this.GetFirstPrimaryElement();
                 if (firstPrimaryElement == null)
                     return;
-                Storage component = GetComponent<Storage>();
-                float amount = Mathf.Min(firstPrimaryElement.Mass, master.emptyRate * dt);
-                if ((double)amount <= 0.0)
-                    return;
+                Storage component = this.GetComponent<Storage>();
+                float amount = Mathf.Min(firstPrimaryElement.Mass, this.master.emptyRate * dt);
+
                 Tag prefabTag = firstPrimaryElement.GetComponent<KPrefabID>().PrefabTag;
-                float amount_consumed;
-                SimUtil.DiseaseInfo disease_info;
-                float aggregate_temperature;
-                component.ConsumeAndGetDisease(prefabTag, amount, out amount_consumed, out disease_info, out aggregate_temperature);
-                Vector3 position = transform.GetPosition();
-                position.y += 1.8f;
-                bool flag = GetComponent<Rotatable>().GetOrientation() == Orientation.FlipH;
-                position.x += flag ? -0.2f : 0.2f;
-                int num = Grid.PosToCell(position) + (flag ? -1 : 1);
-                if (Grid.Solid[num])
-                    num += flag ? 1 : -1;
-                Element element = firstPrimaryElement.Element;
-                byte idx = element.idx;
+
+                if(amount <= 1.0f)
+                {
+                    return;
+                }
+                if (amount <= 0.0)
+                {
+                    component.Drop(prefabTag);
+                    return;
+                }
+
+                component.ConsumeIgnoringDisease(prefabTag, amount);
             }
         }
 
