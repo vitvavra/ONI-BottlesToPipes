@@ -47,7 +47,7 @@ namespace Alesseon.Building.Config
             storage.storageFilters = STORAGEFILTERS.LIQUIDS;
             storage.showInUI = true;
             storage.showDescriptor = true;
-            storage.capacityKg = 200f;
+            storage.capacityKg = 300f;
             go.AddOrGet<TreeFilterable>();
             go.AddOrGet<LiquidBottleEmptier>();
             ConduitDispenser dispenser = go.AddOrGet<ConduitDispenser>();

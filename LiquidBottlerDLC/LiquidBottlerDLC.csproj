@@ -44,12 +44,14 @@
     <Compile Include="HarmonyDatabaseInitPatch.cs" />
     <Compile Include="LiquidBottleEmptier.cs" />
     <Compile Include="LiquidBottleEmptierConfig.cs" />
+    <Compile Include="LiquidBottler.cs" />
     <Compile Include="LiquidBottlerConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StringUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

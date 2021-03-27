@@ -9,11 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidBottlerDLC", "LiquidB
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC08C5B5-8F96-4882-9322-7B116464DF0D}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{AC08C5B5-8F96-4882-9322-7B116464DF0D}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{AC08C5B5-8F96-4882-9322-7B116464DF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC08C5B5-8F96-4882-9322-7B116464DF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE91754F-E62A-40EC-B145-F37660F31B29}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{FE91754F-E62A-40EC-B145-F37660F31B29}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{FE91754F-E62A-40EC-B145-F37660F31B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE91754F-E62A-40EC-B145-F37660F31B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

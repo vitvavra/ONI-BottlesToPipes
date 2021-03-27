@@ -6,7 +6,8 @@ namespace Alesseon.Building.Config
     public class LiquidBottlerConfig : IBuildingConfig
     {
         public const string ID = "Alesseon.LiquidBottler";
-        //TODO add checks for wrong element inside LiquidBottler
+
+
         public static readonly SimHashes[] enabledElements = new SimHashes[] {
             SimHashes.Water, SimHashes.DirtyWater, SimHashes.SaltWater,
             SimHashes.ViscoGel, SimHashes.Petroleum, SimHashes.Brine, SimHashes.CrudeOil,
@@ -61,11 +62,11 @@ namespace Alesseon.Building.Config
             storage.showDescriptor = true;
             storage.storageFilters = STORAGEFILTERS.LIQUIDS;
             storage.capacityKg = 300f;
-            storage.allowItemRemoval = true;
+            storage.allowItemRemoval = false;
             storage.showInUI = true;
             go.AddOrGet<DropAllWorkable>();
 
-            GasBottler liquidBottler = go.AddOrGet<GasBottler>();
+            LiquidBottler liquidBottler = go.AddOrGet<LiquidBottler>();
             liquidBottler.storage = storage;
             liquidBottler.workTime = 9f;
             ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();

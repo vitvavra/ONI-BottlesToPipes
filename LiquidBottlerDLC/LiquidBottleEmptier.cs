@@ -48,7 +48,7 @@ namespace Alesseon.Building
         }
 
         public class StatesInstance :
-          GameStateMachine<LiquidBottleEmptier.States, LiquidBottleEmptier.StatesInstance, LiquidBottleEmptier, object>.GameInstance
+          GameStateMachine<States, StatesInstance, LiquidBottleEmptier, object>.GameInstance
         {
             private FetchChore chore;
 
@@ -60,9 +60,9 @@ namespace Alesseon.Building
                 master.GetComponent<TreeFilterable>().OnFilterChanged += new System.Action<Tag[]>(OnFilterChanged);
                 meter = new MeterController(GetComponent<KBatchedAnimController>(), "meter_target", nameof(meter), Meter.Offset.Infront, Grid.SceneLayer.NoLayer, new string[3]
                 {
-        "meter_target",
-        "meter_arrow",
-        "meter_scale"
+                    "meter_target",
+                    "meter_arrow",
+                    "meter_scale"
                 });
                 Subscribe(-1697596308, new Action<object>(OnStorageChange));
                 Subscribe(644822890, new Action<object>(OnOnlyFetchMarkedItemsSettingChanged));
@@ -74,22 +74,27 @@ namespace Alesseon.Building
                 Tag[] tags = GetComponent<TreeFilterable>().GetTags();
                 if (tags == null || tags.Length == 0)
                 {
-                    component1.TintColour = (Color32)master.noFilterTint;
+                    component1.TintColour = master.noFilterTint;
                 }
                 else
                 {
-                    component1.TintColour = (Color32)master.filterTint;
+                    component1.TintColour = master.filterTint;
                     Tag[] forbidden_tags;
                     if (!master.allowManualPumpingStationFetching)
                         forbidden_tags = new Tag[1]
                         {
-            GameTags.LiquidSource
+                            GameTags.LiquidSource
                         };
                     else
                         forbidden_tags = new Tag[0];
+                    foreach(Tag tag in forbidden_tags)
+                    {
+                        Console.WriteLine("Emptier Tag:" + tag.Name);
+                    }
                     Storage component2 = GetComponent<Storage>();
                     chore = new FetchChore(Db.Get().ChoreTypes.StorageFetch, component2, component2.Capacity(), GetComponent<TreeFilterable>().GetTags(), forbidden_tags: forbidden_tags);
                 }
+
             }
 
             public void CancelChore()
@@ -137,11 +142,6 @@ namespace Alesseon.Building
                 }
                 return null;
             }
-
-            public void Emit(float dt)
-            {
-                return;
-            }
         }
 
         public class States :
@@ -172,8 +172,37 @@ namespace Alesseon.Building
                 });
                 root.ToggleStatusItem(statusItem, (smi => smi.master));
                 unoperational.TagTransition(GameTags.Operational, waitingfordelivery).PlayAnim("off");
-                waitingfordelivery.TagTransition(GameTags.Operational, unoperational, true).EventTransition(GameHashes.OnStorageChange, emptying, (smi => !smi.GetComponent<Storage>().IsEmpty())).Enter("CreateChore", (smi => smi.CreateChore())).Exit("CancelChore", (smi => smi.CancelChore())).PlayAnim("on");
-                emptying.TagTransition(GameTags.Operational, unoperational, true).EventTransition(GameHashes.OnStorageChange, waitingfordelivery, (smi => smi.GetComponent<Storage>().IsEmpty())).Enter("StartMeter", (smi => smi.StartMeter())).Update("Emit", (smi, dt) => smi.Emit(dt)).PlayAnim("working_loop", KAnim.PlayMode.Loop);
+
+                waitingfordelivery
+                    .TagTransition(GameTags.Operational, unoperational, true)
+                    .EventTransition(
+                        GameHashes.OnStorageChange,
+                        emptying, 
+                        (smi => !smi.GetComponent<Storage>().IsEmpty())
+                    ).Enter(
+                        "CreateChore",
+                        (smi => smi.CreateChore())
+                    ).Exit(
+                        "CancelChore",
+                        (smi => smi.CancelChore())
+                    ).PlayAnim("on");
+
+                emptying
+                    .TagTransition(
+                        GameTags.Operational,
+                        unoperational,
+                        true
+                    ).EventTransition(
+                        GameHashes.OnStorageChange,
+                        waitingfordelivery,
+                        (smi => smi.GetComponent<Storage>().IsEmpty())
+                    ).Enter(
+                        "StartMeter",
+                        (smi => smi.StartMeter())
+                    ).PlayAnim(
+                        "working_loop", 
+                        KAnim.PlayMode.Loop
+                    );
             }
         }
     }
