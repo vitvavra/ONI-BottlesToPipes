@@ -24,6 +24,12 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+Lib/DLC/0Harmony.dll
+Lib/DLC/Assembly*
+Lib/DLC/Unity*
+Lib/Vanilla/0Harmony.dll
+Lib/Vanilla/Assembly*
+Lib/Vanilla/Unity*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

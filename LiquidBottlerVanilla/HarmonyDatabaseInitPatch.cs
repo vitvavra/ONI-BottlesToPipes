@@ -7,8 +7,21 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
     [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
     public class LiquidBottlesBuildingsPatch
     {
+        private static void Prefix()
+        {
+            ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottlerConfig.ID);
+            ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottleEmptierConfig.ID);
+        }
+    }
+
+
+    [HarmonyPatch(typeof(Db), "Initialize")]
+    public class LiquidBottlerDbPatch
+    {
+        private const string TechID = "ImprovedLiquidPiping";
         private static void Postfix()
         {
+
             //LiquidBottler strings
             Strings.Add(new string[] {
                     "STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.NAME",
@@ -35,17 +48,6 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
                     "STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.EFFECT",
                     "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
             });
-            ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottlerConfig.ID);
-            ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottleEmptierConfig.ID);
-        }
-    }
-
-    [HarmonyPatch(typeof(Db), "Initialize")]
-    public class LiquidBottlerDbPatch
-    {
-        private const string TechID = "ImprovedLiquidPiping";
-        private static void Postfix()
-        {
 
             if (typeof(Database.Techs).GetField("TECH_GROUPING") == null)
             {
@@ -62,16 +64,16 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
             else
             {
 
-                //List<string> list = new List<string>(Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"]);
-                //list.Add(Building.Config.LiquidBottlerConfig.ID);
-                //list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
-                //Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"] = list.ToArray();
+                List<string> list = new List<string>(Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"]);
+                list.Add(Building.Config.LiquidBottlerConfig.ID);
+                list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
+                Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"] = list.ToArray();
 
-                //System.Reflection.FieldInfo info = typeof(Database.Techs).GetField("TECH_GROUPING");
-                //Dictionary<string, string[]> dict = (Dictionary<string, string[]>)info.GetValue(null);
-                //dict[TechID].Append(Building.Config.LiquidBottlerConfig.ID);
-                //dict[TechID].Append(Building.Config.LiquidBottleEmptierConfig.ID);
-                //typeof(Database.Techs).GetField("TECH_GROUPING").SetValue(null, dict);
+                System.Reflection.FieldInfo info = typeof(Database.Techs).GetField("TECH_GROUPING");
+                Dictionary<string, string[]> dict = (Dictionary<string, string[]>)info.GetValue(null);
+                dict[TechID].Append(Building.Config.LiquidBottlerConfig.ID);
+                dict[TechID].Append(Building.Config.LiquidBottleEmptierConfig.ID);
+                typeof(Database.Techs).GetField("TECH_GROUPING").SetValue(null, dict);
             }
         }
     }

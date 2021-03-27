@@ -10,7 +10,7 @@ namespace Alesseon.Building
     [SerializationConfig(MemberSerialization.OptIn)]
     class LiquidBottleEmptier : StateMachineComponent<LiquidBottleEmptier.StatesInstance>, IGameObjectEffectDescriptor
     {
-        public float emptyRate = 10f;
+        public float emptyRate = 2f;
         [Serialize]
         public bool allowManualPumpingStationFetching;
         [SerializeField]
@@ -140,25 +140,7 @@ namespace Alesseon.Building
 
             public void Emit(float dt)
             {
-                PrimaryElement firstPrimaryElement = this.GetFirstPrimaryElement();
-                if (firstPrimaryElement == null)
-                    return;
-                Storage component = this.GetComponent<Storage>();
-                float amount = Mathf.Min(firstPrimaryElement.Mass, this.master.emptyRate * dt);
-
-                Tag prefabTag = firstPrimaryElement.GetComponent<KPrefabID>().PrefabTag;
-
-                if(amount <= 1.0f)
-                {
-                    return;
-                }
-                if (amount <= 0.0)
-                {
-                    component.Drop(prefabTag);
-                    return;
-                }
-
-                component.ConsumeIgnoringDisease(prefabTag, amount);
+                return;
             }
         }
 
