@@ -7,7 +7,11 @@ namespace Alesseon.Building.Config
     {
         public const string ID = "Alesseon.LiquidBottler";
         //TODO add checks for wrong element inside LiquidBottler
-        public static readonly SimHashes[] enabledElements = new SimHashes[] { SimHashes.Water, SimHashes.DirtyWater, SimHashes.SaltWater };
+        public static readonly SimHashes[] enabledElements = new SimHashes[] {
+            SimHashes.Water, SimHashes.DirtyWater, SimHashes.SaltWater,
+            SimHashes.ViscoGel, SimHashes.Petroleum, SimHashes.Brine, SimHashes.CrudeOil,
+            SimHashes.Ethanol, SimHashes.SuperCoolant, SimHashes.Naphtha
+        };
 
         public override BuildingDef CreateBuildingDef()
         {
