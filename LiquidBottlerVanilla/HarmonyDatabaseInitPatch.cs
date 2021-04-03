@@ -23,13 +23,13 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
         {
 
             CaiLib.Utils.StringUtils.AddBuildingStrings(
-                Building.Config.LiquidBottleEmptierConfig.ID,
+                Building.Config.LiquidBottlerConfig.ID,
                 "Liquid Bottle filler",
                 "Allow Duplicants to fetch bottled liquids for delivery to buildings.",
                 "Automatically stores piped <link=\"ELEMENTSLIQUID\">Liquid</link> into bottles for manual transport."
             );
             CaiLib.Utils.StringUtils.AddBuildingStrings(
-                Building.Config.LiquidBottlerConfig.ID,
+                Building.Config.LiquidBottleEmptierConfig.ID,
                 "Liquid bottle emptier",
                 "Allows emptying bottles directly to the pipe system.",
                 "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
