@@ -16,7 +16,7 @@ namespace Alesseon.Building
         [SerializeField]
         public Color noFilterTint = FilteredStorage.NO_FILTER_TINT;
         [SerializeField]
-        public Color filterTint = FilteredStorage.FILTER_TINT;
+        public Color filterTint = FilteredStorage.NO_FILTER_TINT;
         private static readonly EventSystem.IntraObjectHandler<LiquidBottleEmptier> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<LiquidBottleEmptier>((component, data) => component.OnRefreshUserMenu(data));
         private static readonly EventSystem.IntraObjectHandler<LiquidBottleEmptier> OnCopySettingsDelegate = new EventSystem.IntraObjectHandler<LiquidBottleEmptier>((component, data) => component.OnCopySettings(data));
 
