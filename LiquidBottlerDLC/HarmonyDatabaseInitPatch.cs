@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
-using Harmony;
+using HarmonyLib;
 
 namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
 {
 
-    [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
+    [HarmonyPatch(typeof(GeneratedBuildings))]
+    [HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
     public class LiquidBottlesBuildingsPatch
     {
+        [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         private static void Prefix()
         {
             CaiLib.Utils.StringUtils.AddBuildingStrings(
@@ -27,7 +29,8 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
         }
     }
 
-    [HarmonyPatch(typeof(Db), "Initialize")]
+    [HarmonyPatch(typeof(Db))]
+    [HarmonyPatch("Initialize")]
     public class LiquidBottlerDbPatch
     {
         private const string TechID = "ImprovedLiquidPiping";

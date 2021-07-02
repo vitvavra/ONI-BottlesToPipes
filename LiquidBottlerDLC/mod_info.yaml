@@ -1,1 +1,5 @@
 supportedContent: EXPANSION1_ID
+minimumSupportedBuild: 469473
+APIVersion: 2
+version: "1.3.0"
+staticID: "Alesseon.LiquidBottler"
