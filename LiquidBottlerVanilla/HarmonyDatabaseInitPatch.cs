@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Harmony;
+using HarmonyLib;
 
 namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
 {
@@ -50,11 +50,6 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
             }
             else
             {
-
-                List<string> list = new List<string>(Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"]);
-                list.Add(Building.Config.LiquidBottlerConfig.ID);
-                list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
-                Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"] = list.ToArray();
 
                 System.Reflection.FieldInfo info = typeof(Database.Techs).GetField("TECH_GROUPING");
                 Dictionary<string, string[]> dict = (Dictionary<string, string[]>)info.GetValue(null);
