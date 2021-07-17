@@ -11,7 +11,7 @@ namespace Alesseon.Building.Config
         public static readonly SimHashes[] enabledElements = new SimHashes[] {
             SimHashes.Water, SimHashes.DirtyWater, SimHashes.SaltWater,
             SimHashes.ViscoGel, SimHashes.Petroleum, SimHashes.Brine, SimHashes.CrudeOil,
-            SimHashes.Ethanol, SimHashes.SuperCoolant, SimHashes.Naphtha
+            SimHashes.Ethanol, SimHashes.SuperCoolant, SimHashes.Naphtha, SimHashes.NuclearWaste
         };
 
         public override BuildingDef CreateBuildingDef()

@@ -14,6 +14,9 @@ namespace Alesseon.Building
 
         public Storage storage;
         private Controller.Instance smi;
+        private bool permitAutoDrop = false;
+
+        private static readonly EventSystem.IntraObjectHandler<LiquidBottler> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<LiquidBottler>((component, data) => component.OnRefreshUserMenu(data));
 
         protected override void OnSpawn()
         {
@@ -21,7 +24,7 @@ namespace Alesseon.Building
             smi = new Controller.Instance(this);
             smi.StartSM();
             UpdateStoredItemState();
-
+            Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
         }
 
         protected override void OnCleanUp()
@@ -31,6 +34,26 @@ namespace Alesseon.Building
                 smi.StopSM(nameof(OnCleanUp));
             }
             base.OnCleanUp();
+        }
+
+        private void OnRefreshUserMenu(object data)
+        {
+            Game.Instance.userMenu.AddButton(
+                gameObject,
+                permitAutoDrop ?
+                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP"))
+                :
+                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP")), 0.4f)
+                ;
+        }
+
+        private void OnChangeAllowAutoDrop()
+        {
+            permitAutoDrop = !permitAutoDrop;
+            if (smi != null && smi.GetCurrentState() == smi.sm.ready)
+            {
+                smi.GoTo(smi.sm.filling);
+            }
         }
 
         private void UpdateStoredItemState()
@@ -67,10 +90,14 @@ namespace Alesseon.Building
                         smi =>
                         {
                             smi.master.storage.allowItemRemoval = true;
+                            if (smi.master.permitAutoDrop)
+                            {
+                                smi.master.storage.DropAll();
+                                return;
+                            }
                             foreach (GameObject go in smi.master.storage.items)
                             {
                                 go.AddTag(GameTags.LiquidSource);
-                                Console.WriteLine("HeheStatus: " + go.name);
                                 go.Trigger((int)GameHashes.OnStorageInteracted, smi.master.storage);
                             }
                         }
@@ -87,6 +114,7 @@ namespace Alesseon.Building
 
                 pickup.PlayAnim("pick_up").OnAnimQueueComplete(empty);
             }
+
 
             public new class Instance : GameInstance
             {

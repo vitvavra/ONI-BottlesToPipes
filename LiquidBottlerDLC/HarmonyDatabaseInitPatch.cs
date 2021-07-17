@@ -23,6 +23,10 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
                 "Allows emptying bottles directly to the pipe system.",
                 "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
             ) ;
+            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME", "Enable auto drop");
+            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP", "vczvxcvzxcv drop fluid");
+            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME", "Disable auto drop");
+            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP", "Auto drop disabled");
 
             ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottlerConfig.ID);
             ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottleEmptierConfig.ID);
