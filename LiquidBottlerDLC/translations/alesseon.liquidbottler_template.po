@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.DESC
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.DESC"
+msgid "Allows emptying bottles directly to the pipe system."
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.EFFECT
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.EFFECT"
+msgid "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.NAME"
+msgid "Liquid bottle emptier"
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.DESC
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.DESC"
+msgid "Allow Duplicants to fetch bottled liquids for delivery to buildings."
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.EFFECT
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.EFFECT"
+msgid "Automatically stores piped <link=\"ELEMENTSLIQUID\">Liquid</link> into bottles for manual transport."
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.NAME"
+msgid "Liquid Bottle Filler"
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME"
+msgid "Disable auto drop"
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP"
+msgid "Auto drop disabled"
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME"
+msgid "Enable auto drop"
+msgstr ""
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP"
+msgid "Drop the fluid"
+msgstr ""
+

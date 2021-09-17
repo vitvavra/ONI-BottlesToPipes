@@ -1,0 +1,55 @@
+﻿msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.DESC
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.DESC"
+msgid "Allows emptying bottles directly to the pipe system."
+msgstr "将瓶中液体直接倒入管道中。"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.EFFECT
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.EFFECT"
+msgid "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
+msgstr "自动从瓶中倒空<link="ELEMENTSLIQUID">液体</link>至管道中."
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLEEMPTIER.NAME"
+msgid "Liquid bottle emptier"
+msgstr "空瓶器"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.DESC
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.DESC"
+msgid "Allow Duplicants to fetch bottled liquids for delivery to buildings."
+msgstr "允许复制人获取瓶装液体。"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.EFFECT
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.EFFECT"
+msgid "Automatically stores piped <link=\"ELEMENTSLIQUID\">Liquid</link> into bottles for manual transport."
+msgstr "自动将管道中的<link="ELEMENTSLIQUID">液体</link>装入瓶中以便人工运输。"
+
+#. Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.BUILDINGS.PREFABS.ALESSEON.LIQUIDBOTTLER.NAME"
+msgid "Liquid Bottle Filler"
+msgstr "液体瓶装器"
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME"
+msgid "Disable auto drop"
+msgstr "禁用自动卸货"
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP"
+msgid "Auto drop disabled"
+msgstr "禁用自动卸货""
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME"
+msgid "Enable auto drop"
+msgstr "启用自动卸货"
+
+#. Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP
+msgctxt "Alesseon.LiquidBottler.STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP"
+msgid "Drop the fluid"
+msgstr "持续不断地生成瓶装液体"
+
