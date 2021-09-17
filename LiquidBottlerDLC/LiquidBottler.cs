@@ -5,7 +5,7 @@ using System.Text;
 
 using UnityEngine;
 
-namespace Alesseon.Building
+namespace Alesseon.LiquidBottler.Building
 {
 
     [AddComponentMenu("KMonoBehaviour/Workable/LiquidBottler")]
@@ -41,9 +41,9 @@ namespace Alesseon.Building
             Game.Instance.userMenu.AddButton(
                 gameObject,
                 permitAutoDrop ?
-                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP"))
+                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP"))
                 :
-                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP")), 0.4f)
+                    new KIconButtonMenu.ButtonInfo("action_bottler_autodrop", Strings.Get("STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME"), new System.Action(OnChangeAllowAutoDrop), tooltipText: Strings.Get("STRINGS.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP")), 0.4f)
                 ;
         }
 

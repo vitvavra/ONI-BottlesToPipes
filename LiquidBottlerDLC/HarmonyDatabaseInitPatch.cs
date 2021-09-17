@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using HarmonyLib;
+using static Localization;
 
-namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
+namespace Alesseon.LiquidBottler.HarmonyDatabasePatch
 {
 
     [HarmonyPatch(typeof(GeneratedBuildings))]
@@ -11,23 +13,6 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         private static void Prefix()
         {
-            CaiLib.Utils.StringUtils.AddBuildingStrings(
-                Building.Config.LiquidBottlerConfig.ID,
-                "Liquid Bottle filler",
-                "Allow Duplicants to fetch bottled liquids for delivery to buildings.",
-                "Automatically stores piped <link=\"ELEMENTSLIQUID\">Liquid</link> into bottles for manual transport."
-            );
-            CaiLib.Utils.StringUtils.AddBuildingStrings(
-                Building.Config.LiquidBottleEmptierConfig.ID,
-                "Liquid bottle emptier",
-                "Allows emptying bottles directly to the pipe system.",
-                "Automatically empties <link=\"ELEMENTSLIQUID\">Liquid</link> from bottles for pipe transport."
-            ) ;
-            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.NAME", "Enable auto drop");
-            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.DENIED.TOOLTIP", "vczvxcvzxcv drop fluid");
-            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.NAME", "Disable auto drop");
-            Strings.Add($"ALESSEON.UI.USERMENUACTIONS.AUTO_PUMP_DROP.ALLOWED.TOOLTIP", "Auto drop disabled");
-
             ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottlerConfig.ID);
             ModUtil.AddBuildingToPlanScreen("Plumbing", Building.Config.LiquidBottleEmptierConfig.ID);
         }
@@ -56,10 +41,6 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
             else
             {
 
-                //List<string> list = new List<string>(Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"]);
-                //list.Add(Building.Config.LiquidBottlerConfig.ID);
-                //list.Add(Building.Config.LiquidBottleEmptierConfig.ID);
-                //Database.Techs.TECH_GROUPING["ImprovedLiquidPiping"] = list.ToArray();
 
                 System.Reflection.FieldInfo info = typeof(Database.Techs).GetField("TECH_GROUPING");
                 Dictionary<string, string[]> dict = (Dictionary<string, string[]>)info.GetValue(null);
@@ -67,6 +48,40 @@ namespace Alesseon.HarmonyDatabasePatch.LiquidBottleHandling
                 dict[TechID].Append(Building.Config.LiquidBottleEmptierConfig.ID);
                 typeof(Database.Techs).GetField("TECH_GROUPING").SetValue(null, dict);
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(Localization), "Initialize")]
+    public class Localization_Initialize_Patch
+    {
+        public static void Postfix() => Translate(typeof(Alesseon.LiquidBottler.STRINGS));
+
+        public static void Translate(System.Type root)
+        {
+            // Basic intended way to register strings, keeps namespace
+            RegisterForTranslation(root);
+
+            // Load user created translation files
+            LoadStrings();
+
+            // Register strings without namespace
+            // because we already loaded user transltions, custom languages will overwrite these
+            LocString.CreateLocStringKeys(root, null);
+
+            // Creates template for users to edit
+            GenerateStringsTemplate(root, System.IO.Path.Combine(KMod.Manager.GetDirectory(), "strings_templates"));
+        }
+
+        private static void LoadStrings()
+        {
+            string path = System.IO.Path.Combine(
+                System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "translations",
+                GetLocale()?.Code + ".po"
+            );
+            System.Console.WriteLine(path);
+            if (System.IO.File.Exists(path))
+                OverloadStrings(LoadStringsFile(path, false));
         }
     }
 }

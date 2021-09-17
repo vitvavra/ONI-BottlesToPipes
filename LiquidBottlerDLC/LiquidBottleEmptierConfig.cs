@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Alesseon.Building.Config
+namespace Alesseon.LiquidBottler.Building.Config
 {
     class LiquidBottleEmptierConfig: IBuildingConfig
     {

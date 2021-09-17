@@ -1,7 +1,7 @@
 ﻿using TUNING;
 using UnityEngine;
 
-namespace Alesseon.Building.Config
+namespace Alesseon.LiquidBottler.Building.Config
 {
     public class LiquidBottlerConfig : IBuildingConfig
     {

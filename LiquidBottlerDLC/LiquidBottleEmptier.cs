@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Alesseon.Building
+namespace Alesseon.LiquidBottler.Building
 {
     [SerializationConfig(MemberSerialization.OptIn)]
     class LiquidBottleEmptier : StateMachineComponent<LiquidBottleEmptier.StatesInstance>, IGameObjectEffectDescriptor
