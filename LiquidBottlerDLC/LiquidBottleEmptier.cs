@@ -57,7 +57,7 @@ namespace Alesseon.LiquidBottler.Building
             public StatesInstance(LiquidBottleEmptier smi)
               : base(smi)
             {
-                master.GetComponent<TreeFilterable>().OnFilterChanged += new System.Action<Tag[]>(OnFilterChanged);
+                master.GetComponent<TreeFilterable>().OnFilterChanged += new Action<HashSet<Tag>>(OnFilterChanged);
                 meter = new MeterController(GetComponent<KBatchedAnimController>(), "meter_target", nameof(meter), Meter.Offset.Infront, Grid.SceneLayer.NoLayer, new string[3]
                 {
                     "meter_target",
@@ -71,8 +71,8 @@ namespace Alesseon.LiquidBottler.Building
             public void CreateChore()
             {
                 KBatchedAnimController component1 = GetComponent<KBatchedAnimController>();
-                Tag[] tags = GetComponent<TreeFilterable>().GetTags();
-                if (tags == null || tags.Length == 0)
+                HashSet<Tag> tags = GetComponent<TreeFilterable>().GetTags();
+                if (tags == null || tags.Count == 0)
                 {
                     component1.TintColour = master.noFilterTint;
                 }
@@ -80,11 +80,9 @@ namespace Alesseon.LiquidBottler.Building
                 {
                     component1.TintColour = master.filterTint;
                     Tag[] forbidden_tags;
+                    // HashSet<Tag> forbidden_tags = new HashSet<Tag>();
                     if (!master.allowManualPumpingStationFetching)
-                        forbidden_tags = new Tag[1]
-                        {
-                            GameTags.LiquidSource
-                        };
+                        forbidden_tags = new Tag[1] {GameTags.LiquidSource};
                     else
                         forbidden_tags = new Tag[0];
                     foreach(Tag tag in forbidden_tags)
@@ -92,7 +90,15 @@ namespace Alesseon.LiquidBottler.Building
                         Console.WriteLine("Emptier Tag:" + tag.Name);
                     }
                     Storage component2 = GetComponent<Storage>();
-                    chore = new FetchChore(Db.Get().ChoreTypes.StorageFetch, component2, component2.Capacity(), GetComponent<TreeFilterable>().GetTags(), forbidden_tags: forbidden_tags);
+                    chore = new FetchChore(
+                        Db.Get().ChoreTypes.StorageFetch,
+                        component2,
+                        component2.Capacity(),
+                        GetComponent<TreeFilterable>().GetTags(),
+                        FetchChore.MatchCriteria.MatchID,
+                        Tag.Invalid,
+                        forbidden_tags
+                    );
                 }
 
             }
@@ -107,7 +113,7 @@ namespace Alesseon.LiquidBottler.Building
 
             public void RefreshChore() => GoTo(sm.unoperational);
 
-            private void OnFilterChanged(Tag[] tags) => RefreshChore();
+            private void OnFilterChanged(HashSet<Tag> tags) => RefreshChore();
 
             private void OnStorageChange(object data)
             {
